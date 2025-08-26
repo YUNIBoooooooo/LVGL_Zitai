@@ -25,6 +25,7 @@ void app_main(void)
     // 按键初始化
     key_init();
 
+    // 创建LVGL任务和传感器任务
     xTaskCreatePinnedToCore(lvgl_task, "lvgl_task", 4096 * 2, NULL, 5, NULL, 1);
     xTaskCreatePinnedToCore(qmi8658_task, "qmi8658_task", 4096, NULL, 4, NULL, 1);
 }

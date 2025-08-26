@@ -34,11 +34,11 @@ static void slider_brightness_event_cb(lv_event_t *e)
         esp_err_t ret = bsp_display_brightness_set(slider_value);
         if (ret == ESP_OK)
         {
-            ESP_LOGI(TAG, "💡 屏幕亮度设置为: %ld%%", slider_value);
+            ESP_LOGI(TAG, "屏幕亮度设置为: %ld%%", slider_value);
         }
         else
         {
-            ESP_LOGE(TAG, "❌ 亮度设置失败: %s", esp_err_to_name(ret));
+            ESP_LOGE(TAG, "亮度设置失败: %s", esp_err_to_name(ret));
         }
     }
 }
@@ -49,15 +49,15 @@ void events_init(lv_ui *ui)
     if (ui->screen_slider_1 != NULL)
     {
         lv_obj_add_event_cb(ui->screen_slider_1, slider_brightness_event_cb, LV_EVENT_VALUE_CHANGED, NULL);
-        ESP_LOGI(TAG, "✅ 滑动条亮度控制事件已注册");
+        ESP_LOGI(TAG, "滑动条亮度控制事件已注册");
 
         // 设置滑动条初始值并触发一次亮度设置
         int32_t initial_value = lv_slider_get_value(ui->screen_slider_1);
         bsp_display_brightness_set(initial_value);
-        ESP_LOGI(TAG, "💡 初始亮度设置为: %ld%%", initial_value);
+        ESP_LOGI(TAG, "初始亮度设置为: %ld%%", initial_value);
     }
     else
     {
-        ESP_LOGW(TAG, "⚠️  滑动条对象不存在，无法注册事件");
+        ESP_LOGW(TAG, "滑动条对象不存在，无法注册事件");
     }
 }

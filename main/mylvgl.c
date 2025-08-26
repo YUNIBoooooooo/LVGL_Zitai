@@ -35,12 +35,12 @@ void touchpad_read(lv_indev_t *indev, lv_indev_data_t *data)
     // 每1000次调用输出一次调试信息，确认回调被调用
     if (++debug_counter % 1000 == 0)
     {
-        ESP_LOGI("TOUCH", "🔄 touchpad_read 被调用 %lu 次", debug_counter);
+        ESP_LOGI("TOUCH", "touchpad_read 被调用 %lu 次", debug_counter);
     }
 
     if (tp == NULL)
     {
-        ESP_LOGE("TOUCH", "❌ 触摸屏句柄为空");
+        ESP_LOGE("TOUCH", "触摸屏句柄为空");
         data->state = LV_INDEV_STATE_RELEASED;
         return;
     }
@@ -53,7 +53,7 @@ void touchpad_read(lv_indev_t *indev, lv_indev_data_t *data)
         static uint32_t error_count = 0;
         if (error_count++ < 100)
         {
-            ESP_LOGW("TOUCH", "⚠️  触摸屏读取失败: %s (错误 #%lu)", esp_err_to_name(ret), error_count);
+            ESP_LOGW("TOUCH", "触摸屏读取失败: %s (错误 #%lu)", esp_err_to_name(ret), error_count);
         }
         data->state = LV_INDEV_STATE_RELEASED;
         return;
@@ -82,7 +82,7 @@ void touchpad_read(lv_indev_t *indev, lv_indev_data_t *data)
         data->state = LV_INDEV_STATE_PRESSED;
 
         // 输出原始坐标和调整后坐标到串口
-        ESP_LOGI("TOUCH", "✅ 触摸有效: 原始(%d,%d) -> 调整后(%d,%d)", x, y, adjusted_x, adjusted_y);
+        ESP_LOGI("TOUCH", "触摸有效: 原始(%d,%d) -> 调整后(%d,%d)", x, y, adjusted_x, adjusted_y);
     }
     else
     {

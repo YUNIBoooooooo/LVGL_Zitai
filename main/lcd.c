@@ -122,7 +122,7 @@ esp_lcd_touch_handle_t touch_init(void)
     esp_err_t ret = esp_lcd_new_panel_io_i2c((esp_lcd_i2c_bus_handle_t)BSP_I2C_NUM, &tp_io_config, &tp_io);
     if (ret != ESP_OK)
     {
-        ESP_LOGE(TAG, "❌ 触摸屏IO创建失败: %s", esp_err_to_name(ret));
+        ESP_LOGE(TAG, "触摸屏IO创建失败: %s", esp_err_to_name(ret));
         return NULL;
     }
 
@@ -144,23 +144,23 @@ esp_lcd_touch_handle_t touch_init(void)
     ret = esp_lcd_touch_new_i2c_ft5x06(tp_io, &tp_cfg, &tp_handle);
     if (ret != ESP_OK)
     {
-        ESP_LOGE(TAG, "❌ 触摸屏驱动创建失败: %s", esp_err_to_name(ret));
+        ESP_LOGE(TAG, "触摸屏驱动创建失败: %s", esp_err_to_name(ret));
         return NULL;
     }
 
     // 测试触摸屏通信
-    ESP_LOGI(TAG, "🔍 测试触摸屏通信...");
+    ESP_LOGI(TAG, "测试触摸屏通信...");
     uint16_t test_x, test_y;
     uint8_t test_cnt;
     esp_err_t test_ret = esp_lcd_touch_read_data(tp_handle);
     if (test_ret == ESP_OK)
     {
         bool test_touched = esp_lcd_touch_get_coordinates(tp_handle, &test_x, &test_y, NULL, &test_cnt, 1);
-        ESP_LOGI(TAG, "📡 通信测试成功，当前状态: %s", test_touched ? "有触摸" : "无触摸");
+        ESP_LOGI(TAG, "通信测试成功，当前状态: %s", test_touched ? "有触摸" : "无触摸");
     }
     else
     {
-        ESP_LOGW(TAG, "⚠️  通信测试失败: %s", esp_err_to_name(test_ret));
+        ESP_LOGW(TAG, "通信测试失败: %s", esp_err_to_name(test_ret));
     }
 
     ESP_LOGI(TAG, "✅ 触摸屏初始化完成 (FT6x36 @ 0x38)");

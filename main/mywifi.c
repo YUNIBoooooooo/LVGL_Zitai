@@ -12,19 +12,23 @@ static EventGroupHandle_t s_wifi_event_group; // 事件组句柄，用于任务�
 static const char *TAG = "mywifi";
 
 // 配网状态管理
-static bool app_nvs_get_prov_flag(void) {
+static bool app_nvs_get_prov_flag(void)
+{
     nvs_handle_t h;
     uint8_t v = 0;
-    if (nvs_open("app", NVS_READONLY, &h) == ESP_OK) {
+    if (nvs_open("app", NVS_READONLY, &h) == ESP_OK)
+    {
         nvs_get_u8(h, "prov", &v);
         nvs_close(h);
     }
     return v == 1;
 }
 
-static void app_nvs_set_prov_flag(bool on) {
+static void app_nvs_set_prov_flag(bool on)
+{
     nvs_handle_t h;
-    if (nvs_open("app", NVS_READWRITE, &h) == ESP_OK) {
+    if (nvs_open("app", NVS_READWRITE, &h) == ESP_OK)
+    {
         nvs_set_u8(h, "prov", on ? 1 : 0);
         nvs_commit(h);
         nvs_close(h);
@@ -54,10 +58,10 @@ static void event_handler(void *arg,                   // 用户参数（未使�
         ip_event_got_ip_t *event = (ip_event_got_ip_t *)event_data;
         char ip[16];
         esp_ip4addr_ntoa(&event->ip_info.ip, ip, sizeof(ip));
-        ESP_LOGI(TAG, "🎉 WiFi连接成功！获取到IP地址: %s", ip);
+        ESP_LOGI(TAG, "WiFi连接成功！获取到IP地址: %s", ip);
         xEventGroupSetBits(s_wifi_event_group, CONNECTED_BIT); // 设置连接成功标志
-        
-        static char label_text[20] = "连接成功";               // 标签显示的简化文本
+
+        static char label_text[20] = "连接成功"; // 标签显示的简化文本
         // 更新传感器标签显示的文本
         if (guider_ui.screen_label_2 != NULL)
         {
@@ -100,7 +104,7 @@ static void event_handler(void *arg,                   // 用户参数（未使�
     // 处理SmartConfig发送确认完成事件
     else if (event_base == SC_EVENT && event_id == SC_EVENT_SEND_ACK_DONE)
     {
-        ESP_LOGI(TAG, "✅ SmartConfig配网完成");
+        ESP_LOGI(TAG, "SmartConfig配网完成");
         xEventGroupSetBits(s_wifi_event_group, ESPTOUCH_DONE_BIT); // 设置配网完成标志
     }
 }
@@ -109,11 +113,12 @@ void wifi_init(void)
 {
     // 初始化NVS存储（仅初始化，不要每次擦整块）
     esp_err_t ret = nvs_flash_init();
-    if (ret == ESP_ERR_NVS_NO_FREE_PAGES || ret == ESP_ERR_NVS_NEW_VERSION_FOUND) {
+    if (ret == ESP_ERR_NVS_NO_FREE_PAGES || ret == ESP_ERR_NVS_NEW_VERSION_FOUND)
+    {
         ESP_ERROR_CHECK(nvs_flash_erase());
         ESP_ERROR_CHECK(nvs_flash_init());
     }
-    ESP_LOGI(TAG, "✅ NVS存储初始化完成");
+    ESP_LOGI(TAG, "NVS存储初始化完成");
 
     // 如果需要强制清除Wi-Fi配置，取消注释下面这行
     // ESP_ERROR_CHECK(esp_wifi_restore());
@@ -146,13 +151,16 @@ void wifi_init(void)
     ESP_ERROR_CHECK(esp_wifi_set_mode(WIFI_MODE_STA));
     ESP_ERROR_CHECK(esp_wifi_start());
 
-    if (app_nvs_get_prov_flag()) {
+    if (app_nvs_get_prov_flag())
+    {
         ESP_LOGI(TAG, "已配网，尝试连接保存的网络");
-    } else {
+    }
+    else
+    {
         ESP_LOGI(TAG, "未配网，等待按键启动SmartConfig");
     }
 
-    ESP_LOGI(TAG, "✅ WiFi系统初始化完成");
+    ESP_LOGI(TAG, "WiFi系统初始化完成");
 }
 
 static void smartconfig_task(void *parm) // 任务参数（未使用）
@@ -208,8 +216,10 @@ void IRAM_ATTR key_isr_handler(void *arg)
 // 监控任务，处理按键事件
 static void key_monitor_task(void *pvParameters)
 {
-    while (1) {
-        if (start_smartconfig) {
+    while (1)
+    {
+        if (start_smartconfig)
+        {
             start_smartconfig = false;
             ESP_LOGI(TAG, "按键触发，启动SmartConfig配网");
             xTaskCreatePinnedToCore(smartconfig_task, "smartconfig_task", 4096, NULL, 5, NULL, 0);
@@ -233,7 +243,7 @@ void key_init()
 
     gpio_install_isr_service(0);                           // 安装 GPIO 中断服务
     gpio_isr_handler_add(KEY_GPIO, key_isr_handler, NULL); // 添加中断处理函数
-    
+
     // 创建按键监控任务
     xTaskCreate(key_monitor_task, "key_monitor", 2048, NULL, 3, NULL);
 }

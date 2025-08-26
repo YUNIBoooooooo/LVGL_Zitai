@@ -1,35 +1,26 @@
-| Supported Targets | ESP32 | ESP32-C2 | ESP32-C3 | ESP32-C6 | ESP32-H2 | ESP32-P4 | ESP32-S2 | ESP32-S3 |
-| ----------------- | ----- | -------- | -------- | -------- | -------- | -------- | -------- | -------- |
+# LVGL_Zitai (ESP32-S3 + ST7789 + FT6x36)
 
-# _Sample project_
+基于 ESP-IDF 的 ESP32-S3 项目，集成 LVGL 图形界面、ST7789 LCD、FT6x36 触摸、QMI8658 姿态传感器与 Wi‑Fi（SmartConfig）。已将滑动条与屏幕亮度联动，可通过滑动条实时调节背光亮度。
 
-(See the README.md file in the upper level 'examples' directory for more information about examples.)
+## 硬件与外设
+- SoC: ESP32‑S3
+- LCD: ST7789 320x240（SPI）
+- 触摸: FT6x36（I2C, 0x38）
+- 传感器: QMI8658（I2C）
+- I/O 扩展: PCA9557（I2C）
+- 背光: LEDC PWM，GPIO 42（反相输出）
 
-This is the simplest buildable example. The example is used by command `idf.py create-project`
-that copies the project to user specified path and set it's name. For more information follow the [docs page](https://docs.espressif.com/projects/esp-idf/en/latest/api-guides/build-system.html#start-a-new-project)
+主要引脚（见 `main/lcd.h`）：
+- MOSI: IO40, SCLK: IO41, DC: IO39, CS: -1, RST: NC, BLK: IO42
 
+## 主要功能
+- LVGL 显示与双缓冲刷新（RGB565）
+- 触摸读数与坐标映射；在 `touchpad_read` 中做了 Y 轴手动偏移修正
+- 滑动条联动背光亮度（`generated/events_init.c`）
+- QMI8658 姿态数据显示（`update_sensor_display`）
+- Wi‑Fi STA 与 SmartConfig 配网（`main/mywifi.c`）
 
-
-## How to use example
-We encourage the users to use the example as a template for the new projects.
-A recommended way is to follow the instructions on a [docs page](https://docs.espressif.com/projects/esp-idf/en/latest/api-guides/build-system.html#start-a-new-project).
-
-## Example folder contents
-
-The project **sample_project** contains one source file in C language [main.c](main/main.c). The file is located in folder [main](main).
-
-ESP-IDF projects are built using CMake. The project build configuration is contained in `CMakeLists.txt`
-files that provide set of directives and instructions describing the project's source files and targets
-(executable, library, or both). 
-
-Below is short explanation of remaining files in the project folder.
-
-```
-├── CMakeLists.txt
-├── main
-│   ├── CMakeLists.txt
-│   └── main.c
-└── README.md                  This is the file you are currently reading
-```
-Additionally, the sample project contains Makefile and component.mk files, used for the legacy Make based build system. 
-They are not used or needed when building with CMake and idf.py.
+## 目录结构
+- `main/` 核心源码（`lcd.c/h`, `mylvgl.c/h`, `mywifi.c/h`, `qmi8658.c/h`）
+- `generated/` GUI Guider 生成的界面文件
+- `custom/` 自定义配置（`lv_conf_ext.h` 等）

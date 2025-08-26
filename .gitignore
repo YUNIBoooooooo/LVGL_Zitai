@@ -1,0 +1,31 @@
+# Build artifacts
+build/
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+compile_commands.json
+*.ninja
+.ninja_log
+.ninja_deps
+
+# Binaries / maps
+*.bin
+*.elf
+*.map
+flasher_args.json
+
+# Logs and caches
+.log/
+log/
+*.log
+.ccls-cache/
+.cache/
+
+# IDE
+.vscode/
+.idea/
+
+# Misc
+sdkconfig.old
+**/.DS_Store
+Thumbs.db
