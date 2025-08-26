@@ -1,0 +1,13 @@
+# Target labels
+ bootloader
+# Source files and their labels
+E:/360MoveData/Users/19736/Desktop/ESP32S3/jialichuang/my/LVGL_Zitai/build/CMakeFiles/bootloader
+E:/360MoveData/Users/19736/Desktop/ESP32S3/jialichuang/my/LVGL_Zitai/build/CMakeFiles/bootloader.rule
+E:/360MoveData/Users/19736/Desktop/ESP32S3/jialichuang/my/LVGL_Zitai/build/CMakeFiles/bootloader-complete.rule
+E:/360MoveData/Users/19736/Desktop/ESP32S3/jialichuang/my/LVGL_Zitai/build/bootloader-prefix/src/bootloader-stamp/bootloader-build.rule
+E:/360MoveData/Users/19736/Desktop/ESP32S3/jialichuang/my/LVGL_Zitai/build/bootloader-prefix/src/bootloader-stamp/bootloader-configure.rule
+E:/360MoveData/Users/19736/Desktop/ESP32S3/jialichuang/my/LVGL_Zitai/build/bootloader-prefix/src/bootloader-stamp/bootloader-download.rule
+E:/360MoveData/Users/19736/Desktop/ESP32S3/jialichuang/my/LVGL_Zitai/build/bootloader-prefix/src/bootloader-stamp/bootloader-install.rule
+E:/360MoveData/Users/19736/Desktop/ESP32S3/jialichuang/my/LVGL_Zitai/build/bootloader-prefix/src/bootloader-stamp/bootloader-mkdir.rule
+E:/360MoveData/Users/19736/Desktop/ESP32S3/jialichuang/my/LVGL_Zitai/build/bootloader-prefix/src/bootloader-stamp/bootloader-patch.rule
+E:/360MoveData/Users/19736/Desktop/ESP32S3/jialichuang/my/LVGL_Zitai/build/bootloader-prefix/src/bootloader-stamp/bootloader-update.rule

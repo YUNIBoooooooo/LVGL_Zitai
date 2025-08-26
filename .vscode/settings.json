@@ -1,0 +1,46 @@
+{
+  "C_Cpp.intelliSenseEngine": "default",
+  "idf.espIdfPathWin": "e:\\ESP\\v5.2.3\\esp-idf",
+  "idf.pythonInstallPath": "e:\\ESP\\Tools\\tools\\idf-python\\3.11.2\\python.exe",
+  "idf.openOcdConfigs": [
+    "board/esp32s3-bridge.cfg"
+  ],
+  "idf.portWin": "COM6",
+  "idf.toolsPathWin": "e:\\ESP\\Tools",
+  "idf.customExtraVars": {
+    "IDF_TARGET": "esp32s3"
+  },
+  "clangd.path": "e:\\ESP\\Tools\\tools\\esp-clang\\16.0.1-fe4f10a809\\esp-clang\\bin\\clangd.exe",
+  "clangd.arguments": [
+    "--background-index",
+    "--query-driver=e:\\ESP\\Tools\\tools\\xtensa-esp-elf\\esp-13.2.0_20230928\\xtensa-esp-elf\\bin\\xtensa-esp32s3-elf-gcc.exe",
+    "--compile-commands-dir=${workspaceFolder}\\build"
+  ],
+  "files.associations": {
+    "wifi.h": "c",
+    "lvgl.h": "c",
+    "cstdlib": "c",
+    "lcd.h": "c",
+    "ledc.h": "c",
+    "events_init.h": "c",
+    "gui_guider.h": "c",
+    "mylvgl.h": "c",
+    "esp_timer.h": "c",
+    "widgets_init.h": "c",
+    "custom.h": "c",
+    "freertos.h": "c",
+    "esp_event.h": "c",
+    "task.h": "c",
+    "stdio.h": "c",
+    "string.h": "c",
+    "lv_init.h": "c",
+    "qmi8658.h": "c",
+    "esp_log.h": "c",
+    "nvs_flash.h": "c",
+    "gpio.h": "c",
+    "event_groups.h": "c",
+    "ft5x06.hpp": "c",
+    "esp_lcd_touch_ft5x06.h": "c"
+  },
+  "idf.flashType": "UART"
+}
